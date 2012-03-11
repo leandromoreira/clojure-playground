@@ -1,6 +1,8 @@
 (ns first-test.test.core
-  (:use [first-test.core])
-  (:use [clojure.test]))
+  (:use clojure.test)
+  (:use midje.sweet))
 
-(deftest replace-me ;; FIXME: write
-  (is false "No tests have been written."))
+(deftest simple-facts
+         (fact 
+           (+ 1 0) => 1
+           (* 1 1) => 1))
