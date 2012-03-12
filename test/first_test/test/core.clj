@@ -42,5 +42,27 @@
            (some even? [1 3 5]) => falsey
            (some #(instance? String %) '(1 2 3 "me")) => truthy
            (not-any? even? [1 3 5 9]) => truthy
-
            ))
+
+(deftest transforming-seq
+         (fact
+           (map #(inc %) [2 3]) => '(3 4)
+           (map #(format "<li>%s</li>" %) '("r" "b"))
+                => '("<li>r</li>" "<li>b</li>")
+           (reduce + [1 2 3 4]) => 10
+           (sort [12 8 9 90 1]) => [1 8 9 12 90]
+           (sort-by #(.toString %) [1 10 2 3]) => [1 10 2 3]
+           (sort-by :name [ {:name "mario" :color "red"} 
+                           {:name "luigui" :color "green"}
+                           {:name "yoshi" :color "blue"} ]
+                    ) => (contains {:name "mario" :color "red"})))
+(use 'clojure.set)
+(deftest set-operations
+         (def letters #{"a" "b"})
+         (def numbers #{1 2})
+         (def mix #{"a" 3 :four})
+         (fact
+           (union letters numbers) => #{"a" "b" 1 2}
+           (difference letters mix) => #{ "b" }
+           (intersection letters mix) => #{ "a" }
+           (select even? numbers) => #{2}))
