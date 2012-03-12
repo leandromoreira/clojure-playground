@@ -30,3 +30,9 @@
            (interleave [:a :b] [1 2]) => '(:a 1 :b 2)
            (interleave [:a :b] [1 2 3]) => '(:a 1 :b 2)))
 
+(deftest filter-sequences
+         (def fruits '("avocato" "orange" "apple"))
+         (fact
+           "Filter uses a predicate over a collection"
+           (filter #(.startsWith % "a") fruits) => '("avocato" "apple")
+           (filter odd? #{1 2 3 4}) => '(1 3)))
