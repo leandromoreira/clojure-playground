@@ -35,4 +35,12 @@
          (fact
            "Filter uses a predicate over a collection"
            (filter #(.startsWith % "a") fruits) => '("avocato" "apple")
-           (filter odd? #{1 2 3 4}) => '(1 3)))
+           (filter odd? #{1 2 3 4}) => '(1 3)
+           (take-while #(< % 3) (iterate inc 1)) => '(1 2)
+           (drop-while even? '(2 4 5 6 90 100)) => '(5 6 90 100)
+           (every? odd? [1 3 5]) => truthy
+           (some even? [1 3 5]) => falsey
+           (some #(instance? String %) '(1 2 3 "me")) => truthy
+           (not-any? even? [1 3 5 9]) => truthy
+
+           ))
